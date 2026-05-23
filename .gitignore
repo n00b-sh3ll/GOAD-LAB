@@ -38,3 +38,28 @@ docs/site/
 docs/olddocs/
 docs/mkdocs/site/
 scripts/archives/
+
+# ==============================================================
+# Artefatos de build e arquivos locais
+# ==============================================================
+
+# Terraform — estado e cache local (não credenciais)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Packer — cache de ISO e logs de build
+packer_cache/
+packer-manifest.json
+*.log
+
+# Inventories alternativos/temporários (manter apenas o principal)
+inventory_
+inventory_old
+inventory2
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
