@@ -1,0 +1,29 @@
+[default]
+; ------------------------------------------------
+; sevenkingdoms.local
+; ------------------------------------------------
+dc01 ansible_host=10.10.0.10 dns_domain=dc01 dict_key=dc01
+; ------------------------------------------------
+; north.sevenkingdoms.local
+; ------------------------------------------------
+dc02 ansible_host=10.10.0.11 dns_domain=dc01 dict_key=dc02
+srv02 ansible_host=10.10.0.22 dns_domain=dc02 dict_key=srv02
+; ------------------------------------------------
+; essos.local
+; ------------------------------------------------
+dc03 ansible_host=10.10.0.12 dns_domain=dc03 dict_key=dc03
+srv03 ansible_host=10.10.0.23 dns_domain=dc03 dict_key=srv03
+
+[all:vars]
+force_dns_server=yes
+dns_server=10.10.0.1
+
+; WinRM connection settings
+ansible_user=vagrant
+ansible_password=vagrant
+ansible_connection=winrm
+ansible_winrm_transport=ntlm
+ansible_winrm_port=5985
+ansible_winrm_server_cert_validation=ignore
+ansible_winrm_operation_timeout_sec=120
+ansible_winrm_read_timeout_sec=150

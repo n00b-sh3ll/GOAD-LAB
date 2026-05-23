@@ -1,0 +1,130 @@
+[default]
+; ------------------------------------------------
+; sevenkingdoms.local
+; ------------------------------------------------
+dc01 ansible_host=10.10.0.10 dns_domain=dc01 dict_key=dc01
+; ------------------------------------------------
+; north.sevenkingdoms.local
+; ------------------------------------------------
+dc02 ansible_host=10.10.0.11 dns_domain=dc01 dict_key=dc02
+srv02 ansible_host=10.10.0.22 dns_domain=dc02 dict_key=srv02
+; ------------------------------------------------
+; essos.local
+; ------------------------------------------------
+dc03 ansible_host=10.10.0.12 dns_domain=dc03 dict_key=dc03
+srv03 ansible_host=10.10.0.23 dns_domain=dc03 dict_key=srv03
+
+; ------------------------------------------------
+; Grupos de função
+; ------------------------------------------------
+[dc]
+dc01
+dc02
+dc03
+
+[server]
+srv02
+srv03
+
+[parent_dc]
+dc01
+dc03
+
+[child_dc]
+dc02
+
+[trust]
+dc01
+dc03
+
+[laps_dc]
+dc01
+dc02
+dc03
+
+[laps_server]
+srv02
+srv03
+
+[laps_workstation]
+
+[iis]
+srv02
+
+[mssql]
+srv02
+
+[mssql_ssms]
+srv02
+
+[mssql_reporting]
+
+[adcs]
+srv02
+
+[adcs_customtemplates]
+
+[webdav]
+
+[defender_on]
+
+[defender_off]
+dc01
+dc02
+dc03
+srv02
+srv03
+
+[no_update]
+dc01
+dc02
+dc03
+srv02
+srv03
+
+[update]
+
+[workstation]
+
+; ------------------------------------------------
+; Grupos compostos
+; ------------------------------------------------
+[domain:children]
+dc
+server
+workstation
+
+[linux_domain]
+
+[extensions]
+
+; ------------------------------------------------
+; Variáveis globais
+; ------------------------------------------------
+[all:vars]
+force_dns_server=yes
+dns_server=10.10.0.1
+
+; Proxy — desabilitado (sem acesso via proxy)
+enable_http_proxy=no
+http_proxy=no
+ad_http_proxy=
+ad_https_proxy=
+
+; Rota estática — desabilitada
+add_route=no
+route_network=
+route_gateway=
+
+; WinRM
+ansible_user=vagrant
+ansible_password=vagrant
+ansible_connection=winrm
+ansible_winrm_transport=ntlm
+ansible_winrm_port=5985
+ansible_winrm_server_cert_validation=ignore
+ansible_winrm_operation_timeout_sec=120
+ansible_winrm_read_timeout_sec=150
+keyboard_layouts=["00000409"]
+admin_user=Administrator
+dns_server_forwarder=8.8.8.8
